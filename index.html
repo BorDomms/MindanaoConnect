@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mindanao Connect</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="topbar">
+  <a class="brand" href="#" data-view="home" aria-label="Mindanao Connect home">
+    <span class="logo" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v5m0 0-5.5 4.5M12 12.5l5.5 4.5"/></svg>
+    </span>
+    <span><strong>MINDANAO CONNECT</strong><small>MinDA · Community Engagement</small></span>
+  </a>
+  <div class="top-right">
+    <span class="badge">Concept design</span>
+    <button id="homeBtn" class="btn-ghost" type="button" data-view="home" hidden><span aria-hidden="true">←</span> Home</button>
+    <button id="authBtn" class="btn-ghost" type="button">Sign in</button>
+    <button id="adminToggle" class="btn-ghost" type="button">Admin portal</button>
+  </div>
+</header>
+
+<div id="configNotice" class="notice" hidden>Supabase isn't configured yet. Open <code>app.js</code> and set your project URL and anon key.</div>
+
+<main id="main">
+<!-- HOME -->
+<section id="view-home" class="view active">
+  <div class="hero">
+    <h1>Your Voice Matters in Building Mindanao.</h1>
+    <p>Connect with government agencies, share your community's needs, and participate in Mindanao's development.</p>
+    <form id="searchForm" class="search" role="search">
+      <label for="searchInput">What would you like to do?</label>
+      <div class="search-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="searchInput" type="search" placeholder="Search concerns, programs, or services…" autocomplete="off"><button class="btn" type="submit">Search</button>
+      </div>
+    </form>
+    <div class="actions">
+      <button type="button" data-action="concern"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Submit a Concern</button>
+      <button type="button" data-action="idea"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>Share an Idea</button>
+      <button type="button" data-view="track"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h6"/></svg>Track Submission</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h2 class="section-title">Explore Mindanao Connect</h2>
+    <div class="explore">
+      <button type="button" data-view="voice"><b>Community Voice</b><span>Share your concerns and suggestions.</span></button>
+      <button type="button" data-view="polls"><b>Community Polls</b><span>Help identify community priorities.</span></button>
+      <button type="button" data-view="info"><b>Development Information</b><span>Programs and available government assistance.</span></button>
+      <button type="button" data-view="insights"><b>Development Insights</b><span>Understand community needs and trends.</span></button>
+    </div>
+
+    <div class="how">
+      <h3>How Mindanao Connect works</h3>
+      <ol>
+        <li>Citizens share their concerns.</li>
+        <li>MinDA reviews and categorizes submissions.</li>
+        <li>Relevant agencies receive referrals.</li>
+        <li>Agencies provide updates and responses.</li>
+        <li>Citizens track progress and provide feedback.</li>
+      </ol>
+    </div>
+    <p class="fine">Illustrative homepage prototype, not an existing or officially endorsed MinDA platform.</p>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section id="view-voice" class="view"><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><button type="button" class="back" data-view="home"><span aria-hidden="true">←</span> Back to home</button></nav>
+  <div class="page-head"><div><h1>Community Voice</h1><p>Concerns and ideas shared by citizens. Open one to read responses or add feedback.</p></div>
+    <div class="head-actions"><button class="btn" data-action="concern">Submit a concern</button><button class="btn-line" data-action="idea">Share an idea</button></div></div>
+  <div class="filters">
+    <input id="feedQ" type="search" placeholder="Search…" aria-label="Search submissions">
+    <select id="feedType" aria-label="Type"><option value="">All types</option><option value="concern">Concerns</option><option value="idea">Ideas</option></select>
+    <select id="feedCat" aria-label="Category"></select>
+  </div>
+  <div id="feed" class="list"></div>
+</div></section>
+
+<!-- TRACK -->
+<section id="view-track" class="view"><div class="wrap narrow">
+  <nav class="crumbs" aria-label="Breadcrumb"><button type="button" class="back" data-view="home"><span aria-hidden="true">←</span> Back to home</button></nav>
+  <div class="page-head"><div><h1>Track Submission</h1><p>Enter the reference code you received when you submitted.</p></div></div>
+  <form id="trackForm" class="inline-form"><input id="trackCode" placeholder="e.g. MC-4F7K2Q" autocomplete="off" aria-label="Reference code"><button class="btn">Track</button></form>
+  <div id="trackResult" aria-live="polite"></div>
+  <h2 class="sub">Your submissions</h2>
+  <div id="mine" class="list"></div>
+</div></section>
+
+<!-- POLLS -->
+<section id="view-polls" class="view"><div class="wrap narrow">
+  <nav class="crumbs" aria-label="Breadcrumb"><button type="button" class="back" data-view="home"><span aria-hidden="true">←</span> Back to home</button></nav>
+  <div class="page-head"><div><h1>Community Polls</h1><p>Vote on what your community needs most. Sign in to vote. One vote per account.</p></div></div>
+  <div id="pollList" class="list"></div>
+</div></section>
+
+<!-- INFO -->
+<section id="view-info" class="view"><div class="wrap narrow">
+  <nav class="crumbs" aria-label="Breadcrumb"><button type="button" class="back" data-view="home"><span aria-hidden="true">←</span> Back to home</button></nav>
+  <div class="page-head"><div><h1>Development Information</h1><p>Where to look for government programs and assistance.</p></div></div>
+  <div class="list">
+    <div class="card"><b>MinDA</b><p>Mindanao Development Authority. Coordinates development efforts across Mindanao.</p></div>
+    <div class="card"><b>DILG</b><p>Local government concerns, barangay services, and local development coordination.</p></div>
+    <div class="card"><b>DA</b><p>Agricultural support: seeds, equipment, farm-to-market assistance.</p></div>
+    <div class="card"><b>DPWH</b><p>Roads, bridges, and public infrastructure.</p></div>
+    <div class="card"><b>DOH</b><p>Health facilities, programs, and services.</p></div>
+    <p class="fine">Placeholder content. Replace with verified program information before use.</p>
+  </div>
+</div></section>
+
+<!-- INSIGHTS -->
+<section id="view-insights" class="view"><div class="wrap narrow">
+  <nav class="crumbs" aria-label="Breadcrumb"><button type="button" class="back" data-view="home"><span aria-hidden="true">←</span> Back to home</button></nav>
+  <div class="page-head"><div><h1>Development Insights</h1><p>What communities are reporting, by category.</p></div></div>
+  <div id="insights"></div>
+</div></section>
+
+<!-- ADMIN -->
+<section id="view-admin" class="view"><div class="wrap">
+  <div class="page-head"><div><h1>Agency Portal</h1><p>Review, categorize, refer, and respond to citizen submissions.</p></div>
+    <div class="head-actions"><button class="btn-line" id="exitAdmin">Back to citizen portal</button></div></div>
+  <div id="adminStats" class="stats"></div>
+  <div class="filters">
+    <input id="admQ" type="search" placeholder="Search…" aria-label="Search">
+    <select id="admStatus" aria-label="Status"></select>
+    <select id="admCat" aria-label="Category"></select>
+  </div>
+  <div class="table-scroll"><table class="tbl"><caption class="sr-only">Citizen submissions. Select a reference code to review one.</caption><thead><tr><th scope="col">Ref</th><th scope="col">Type</th><th scope="col">Title</th><th scope="col">Category</th><th scope="col">Location</th><th scope="col">Status</th><th scope="col">Agency</th><th scope="col">Date</th></tr></thead><tbody id="admRows"></tbody></table></div>
+
+  <h2 class="sub">Polls</h2>
+  <form id="pollForm" class="stack">
+    <label class="lbl" for="pollQ">Poll question</label><input id="pollQ" required>
+    <label class="lbl" for="pollOpts">Options, separated by commas</label><input id="pollOpts" placeholder="e.g. Roads, Health, Schools" required>
+    <button class="btn">Create poll</button>
+  </form>
+  <div id="admPolls" class="list"></div>
+</div></section>
+</main>
+
+<!-- floating admin password panel -->
+<div id="adminPanel" class="float-panel" hidden role="dialog" aria-label="Admin access">
+  <form id="adminForm">
+    <label for="adminPass">Officer password</label>
+    <input id="adminPass" type="password" autocomplete="off" required>
+    <p class="fine">Signing in here signs you out of any citizen account.</p>
+    <p id="adminErr" class="err" role="alert" hidden>Incorrect password.</p>
+    <div class="row"><button type="button" class="btn-line" id="adminCancel">Cancel</button><button class="btn">Enter</button></div>
+  </form>
+</div>
+
+<!-- generic modal -->
+<div id="modal" class="modal" hidden><div class="modal-box" role="dialog" aria-modal="true"><button class="x" id="modalX" aria-label="Close">×</button><div id="modalBody"></div></div></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
